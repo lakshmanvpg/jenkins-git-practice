@@ -2,16 +2,35 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'name', defaultValue: 'lakshman', description: 'Enter username')
-        string(name: 'host', defaultValue: 'myserver', description: 'Enter servername')
+        choice(
+            name: 'ENV',
+            choices: ['dev', 'qa', 'prod'],
+            description: 'Select environment'
+        )
     }
 
     stages {
-        stage('Example') {
+        stage('Stop Tomcat') {
             steps {
-                echo "myname is  ${params.username}"
-                echo "servername is  ${params.hostname}"
-                
+                script {
+
+                    if (params.ENV == "dev") {
+                        env.TOMCAT_PATH = "/opt/tomcat-dev"
+                    }
+                    else if (params.ENV == "qa") {
+                        env.TOMCAT_PATH = "/opt/tomcat-qa"
+                    }
+                    else if (params.ENV == "prod") {
+                        env.TOMCAT_PATH = "/opt/tomcat-prod"
+                    }
+
+                    echo "Stopping Tomcat in ${params.ENV}"
+                    echo "Path: ${env.TOMCAT_PATH}"
+
+                    sh """
+                        ${env.TOMCAT_PATH}/bin/shutdown.sh
+                    """
+                }
             }
         }
     }
