@@ -1,23 +1,17 @@
 pipeline {
     agent any
 
+    parameters {
+        string(name: 'name', defaultValue: 'lakshman', description: 'Enter username')
+        string(name: 'host', defaultValue: 'myserver', description: 'Enter servername')
+    }
+
     stages {
-        stage('Stage 1 - Checkout') {
+        stage('Example') {
             steps {
-                echo 'Code checked out from Git'
-            }
-        }
-
-        stage('Stage 2 - Read File') {
-            steps {
-                echo 'Reading hello.txt file'
-                bat 'type hello.txt'
-            }
-        }
-
-        stage('Stage 3 - Done') {
-            steps {
-                echo 'Pipeline completed successfully'
+                echo "myname is  ${params.username}"
+                echo "servername is  ${params.hostname}"
+                
             }
         }
     }
