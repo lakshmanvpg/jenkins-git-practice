@@ -9,6 +9,7 @@ pipeline {
         stage('Example') {
             steps {
                 echo "Hello"
+                exit -1
                 
             }
         }
