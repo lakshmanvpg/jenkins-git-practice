@@ -1,36 +1,16 @@
 pipeline {
-    agent any
-
-    options {
-        timeout(time: 1, unit: 'MINUTES')
-    }
+    agent { label 'agent1' }
 
     stages {
-        stage('Example') {
+        stage('Verify Agent') {
             steps {
-                echo "Hello"
-                               
+                sh '''
+                    echo "Running on Agent"
+                    hostname
+                    whoami
+                    pwd
+                '''
             }
         }
-    }
-    post {
-        changed {
-            echo "Build result changed from last run"
-        }
-        success {
-            echo "Build succeeded"
-        }
-
-        failure {
-            echo "Build failed"
-                    }
-
-        always {
-            echo "This always runs"
-            cleanWs()
-        }
-        aborted {
-        echo "Build was aborted"
-    }
     }
 }
