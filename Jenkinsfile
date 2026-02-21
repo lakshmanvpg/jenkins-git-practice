@@ -1,14 +1,13 @@
 pipeline {
-    agent { label 'agent1' }
+    agent { label 'built-in' }
 
     stages {
-        stage('Verify Agent') {
+        stage('Run on Built-In Node') {
             steps {
                 sh '''
-                    echo "Running on Agent"
+                    echo "Running on Built-In Node"
                     hostname
-                    whoami
-                    pwd
+                    echo "Node: $NODE_NAME"
                 '''
             }
         }
