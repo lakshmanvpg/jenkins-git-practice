@@ -1,18 +1,21 @@
 pipeline {
     agent any
 
-    parameters {
-        password(
-            name: 'DEPLOY_PASSWORD',
-            defaultValue: '',
-            description: 'Enter deployment password'
-        )
-    }
-
     stages {
-        stage('Example') {
+        stage('Test Credentials') {
             steps {
-                echo "Password is ${params.DEPLOY_PASSWORD}"
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'github',
+                        usernameVariable: 'USER',
+                        passwordVariable: 'PASS'
+                    )
+                ]) {
+                    sh '''
+                        echo "Username is: $USER"
+                        echo "Password is :$PASS"
+                    '''
+                }
             }
         }
     }
