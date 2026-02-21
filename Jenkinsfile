@@ -7,6 +7,7 @@ pipeline {
             steps {
                 sh '''
                     id
+                    su - jenkins
                     ssh jenkins@20.219.1.181 << 'EOF'
                         echo "Updating packages"
                         sudo apt update
