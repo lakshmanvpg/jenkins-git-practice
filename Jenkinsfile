@@ -1,21 +1,14 @@
 pipeline {
     agent any
 
+    options {
+        timeout(time: 1, unit: 'MINUTES')
+    }
+
     stages {
-        stage('Test Credentials') {
+        stage('Example') {
             steps {
-                withCredentials([
-                    usernamePassword(
-                        credentialsId: 'github',
-                        usernameVariable: 'USER',
-                        passwordVariable: 'PASS'
-                    )
-                ]) {
-                    sh '''
-                        echo "Username is: $USER"
-                        echo "Password is :$PASS"
-                    '''
-                }
+                echo "Hello"
             }
         }
     }
