@@ -23,10 +23,11 @@ pipeline {
 
         failure {
             echo "Build failed"
-        }
+                    }
 
         always {
             echo "This always runs"
+            cleanWs()
         }
         aborted {
         echo "Build was aborted"
