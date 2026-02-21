@@ -6,7 +6,7 @@ pipeline {
         stage('Update packages on remote server') {
             steps {
                 sh '''
-                    sudo su - jenkins
+                    id
                     ssh jenkins@20.219.1.181 << 'EOF'
                         echo "Updating packages"
                         sudo apt update
