@@ -15,6 +15,9 @@ pipeline {
         }
     }
     post {
+        changed {
+            echo "Build result changed from last run"
+        }
         success {
             echo "Build succeeded"
         }
