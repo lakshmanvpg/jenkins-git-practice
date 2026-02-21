@@ -2,18 +2,17 @@ pipeline {
     agent any
 
     parameters {
-        text(
-            name: 'DEPLOY_NOTES',
-            defaultValue: 'Enter deployment notes here...',
-            description: 'Provide release details'
+        password(
+            name: 'DEPLOY_PASSWORD',
+            defaultValue: '',
+            description: 'Enter deployment password'
         )
     }
 
     stages {
-        stage('Print Notes') {
+        stage('Example') {
             steps {
-                echo "Notes:"
-                echo "${params.DEPLOY_NOTES}"
+                echo "Password is ${params.DEPLOY_PASSWORD}"
             }
         }
     }
